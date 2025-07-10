@@ -39,8 +39,6 @@ const List = ({ list, onUpdate, onDelete }) => {
 
   //구조 분해 할당
   const { totalCount, doneCount, notDoneCount } = useMemo(() => {
-    console.log("useMemo 최적화 중");
-
     const totalCount = list.length;
     const doneCount = list.filter((data) => {
       return data.isDone === true;
