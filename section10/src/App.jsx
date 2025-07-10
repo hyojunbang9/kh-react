@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import List from "./components/List";
 import Edit from "./components/Edit";
 import Exam from "./components/Exam";
-import { useRef, useState, useReducer } from "react";
+import { useRef, useState, useReducer, useCallback } from "react";
 
 const mockData = [
   { id: 0, isDone: false, content: "react study", date: new Date().getTime() },
@@ -37,7 +37,8 @@ function App() {
   const idRef = useRef(3); // {current : 3}
 
   //삽입
-  const onInsert = (content) => {
+  //useCallback에 해당되는 이벤트 핸들러 함수를 딱 한 번만 작동 시키게 한다.
+  const onInsert = useCallback((content) => {
     dispatch({
       type: "INSERT",
       data: {
@@ -47,21 +48,20 @@ function App() {
         date: new Date().getTime(),
       },
     });
-    // const newList = {
-    // id: idRef.current++,
-    // isDone: false,
-    // content: content,
-    // date: new Date().getTime(),
-    // };
-    // setList([newList, ...list]);
-  };
+  }, []);
+  // const newList = {
+  // id: idRef.current++,
+  // isDone: false,
+  // content: content,
+  // date: new Date().getTime(),
+  // };
+  // setList([newList, ...list]);
+  // };
   //수정
-  const onUpdate = (tagId) => {
-    dispatch({
-      type: "UPDATE",
-      tagId: tagId,
-    });
-  };
+  // 수정하기
+  const onUpdate = useCallback((tagId) => {
+    dispatch({ type: "onUpdate", data: tagId });
+  }, []);
   // const onUpdate = (tagId) => {
   //   setList(
   //     list.map((data) => {
@@ -71,19 +71,9 @@ function App() {
   // };
 
   //삭제
-  const onDelete = (tagId) => {
-    dispatch({
-      type: "DELETE",
-      tagId: tagId,
-    });
-  };
-  // const onDelete = (tagId) => {
-  //   setList(
-  //     list.filter((data) => {
-  //       return data.id !== tagId;
-  //     })
-  //   );
-  // };
+  const onDelete = useCallback((tagId) => {
+    dispatch({ type: "onDelete", data: tagId });
+  }, []);
   return (
     <>
       <div className="App">
