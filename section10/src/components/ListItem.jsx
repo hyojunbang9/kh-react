@@ -1,4 +1,5 @@
 import "./ListItem.css";
+import { memo } from "react";
 
 const ListItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
   const onChangeCheckBox = () => {
@@ -16,5 +17,14 @@ const ListItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
     </div>
   );
 };
-
-export default ListItem;
+/*
+export default memo(ListItem, (prevProps, nextProps) => {
+  //HOC Higher order component
+  if (prevProps.id !== nextProps.id) return false;
+  if (prevProps.isDone !== nextProps.isDone) return false;
+  if (prevProps.content !== nextProps.content) return false;
+  if (prevProps.date !== nextProps.date) return false;
+  return true;
+});
+*/
+export default memo(ListItem);

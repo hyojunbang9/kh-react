@@ -8,12 +8,7 @@ import { useRef, useState, useReducer } from "react";
 const mockData = [
   { id: 0, isDone: false, content: "react study", date: new Date().getTime() },
   { id: 1, isDone: false, content: "spring study", date: new Date().getTime() },
-  {
-    id: 2,
-    isDone: false,
-    content: "motocycle riding",
-    date: new Date().getTime(),
-  },
+  { id: 2, isDone: false, content: "riding", date: new Date().getTime() },
 ];
 
 function reducer(list, action) {
