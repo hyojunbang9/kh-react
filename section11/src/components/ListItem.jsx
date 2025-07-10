@@ -1,9 +1,9 @@
 import "./ListItem.css";
 import { memo, useContext } from "react";
-import { ListContext } from "../App";
+import { ListDispatchContext } from "../App";
 
 const ListItem = ({ id, isDone, content, date }) => {
-  const { onUpdate, onDelete } = useContext(ListContext);
+  const { onUpdate, onDelete } = useContext(ListDispatchContext);
   const onChangeCheckBox = () => {
     onUpdate(id);
   };

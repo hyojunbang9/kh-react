@@ -1,10 +1,10 @@
 import "./List.css";
 import ListItem from "./ListItem";
 import { useState, useMemo, useContext } from "react";
-import { ListContext } from "../App";
+import { ListStateContext } from "../App";
 
 const List = () => {
-  const { list } = useContext(ListContext);
+  const { list } = useContext(ListStateContext);
   const [search, setSearch] = useState("");
 
   const onChangeInput = (e) => {

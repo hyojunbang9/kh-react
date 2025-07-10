@@ -9,6 +9,7 @@ import {
   useReducer,
   useCallback,
   createContext,
+  useMemo,
 } from "react";
 
 const mockData = [
@@ -21,15 +22,15 @@ function reducer(list, action) {
   switch (action.type) {
     case "INSERT":
       return [action.data, ...list];
-    case "UPDATE":
+    case "onUpdate":
       return list.map((data) => {
-        return data.id === action.tagId
+        return data.id === action.data
           ? { ...data, isDone: !data.isDone }
           : data;
       });
-    case "DELETE":
+    case "onDelete":
       return list.filter((data) => {
-        return data.id !== action.tagId;
+        return data.id !== action.data;
       });
     default:
       return list;
@@ -37,7 +38,9 @@ function reducer(list, action) {
 }
 
 // 1 createContext()생성해서 export 시킨다.(context -> 자바의 static과 유사)
-export const ListContext = createContext();
+export const ListStateContext = createContext();
+// 랜더링 방지를 위해 두 개 생성
+export const ListDispatchContext = createContext();
 
 function App() {
   //상태 관리 (전체 데이터)
@@ -67,15 +70,23 @@ function App() {
   const onDelete = useCallback((tagId) => {
     dispatch({ type: "onDelete", data: tagId });
   }, []);
+
+  // 딱 한 번만 발생 하도록 처리 (useContext에 사용)
+  const memorizedDispatch = useMemo(() => {
+    return { onInsert, onUpdate, onDelete };
+  }, [onInsert, onUpdate, onDelete]);
+
   return (
     <>
       <div className="App">
         <Header />
         {/* 2 Context로 다 옮기기 */}
-        <ListContext.Provider value={{ list, onInsert, onUpdate, onDelete }}>
-          <Edit />
-          <List />
-        </ListContext.Provider>
+        <ListStateContext.Provider value={{ list }}>
+          <ListDispatchContext.Provider value={memorizedDispatch}>
+            <Edit />
+            <List />
+          </ListDispatchContext.Provider>
+        </ListStateContext.Provider>
       </div>
     </>
   );

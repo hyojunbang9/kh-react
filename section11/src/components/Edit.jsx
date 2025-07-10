@@ -1,9 +1,9 @@
 import "./Edit.css";
 import { useState, useRef, useContext } from "react";
-import { ListContext } from "../App";
+import { ListDispatchContext } from "../App";
 
 const Edit = () => {
-  const { onInsert } = useContext(ListContext);
+  const { onInsert } = useContext(ListDispatchContext);
   const [content, setContent] = useState("");
   const inputRef = useRef();
 
