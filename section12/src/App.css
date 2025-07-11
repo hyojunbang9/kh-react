@@ -1,0 +1,14 @@
+.App {
+  width: 500px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  border: 2px dotted black;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.App img {
+  width: 45px;
+}
