@@ -1,0 +1,58 @@
+import React from "react";
+import { Container } from "react-bootstrap";
+import Header from "../../include/Header";
+import { useCallback, useMemo } from "react";
+import {
+  useParams,
+  useNavigate,
+  useSearchParams,
+  createSearchParams,
+} from "react-router-dom";
+
+const ReadPage = () => {
+  const { tno } = useParams();
+  const nav = useNavigate();
+  const [queryParams] = useSearchParams();
+  const page = queryParams.get("page") ? parseInt(queryParams.get("page")) : 1;
+  const size = queryParams.get("size") ? parseInt(queryParams.get("size")) : 10;
+
+  const queryStr = useMemo(() => {
+    return createSearchParams({ page, size }).toString();
+  }, [page, size]);
+
+  const moveToModify = useCallback(
+    (tno) => {
+      nav({
+        pathname: `/todo/modify/${tno}`,
+        search: queryStr,
+      });
+    },
+    [nav, queryStr]
+  );
+  const moveToList = useCallback(() => {
+    nav({ pathname: `/todo/list`, search: queryStr });
+  }, [nav, queryStr]);
+
+  return (
+    <Container>
+      <Header />
+      To do ReadPage {tno}
+      <div class="d-grid col-6 mx-auto">
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          onClick={() => {
+            moveToModify(tno);
+          }}
+        >
+          Move Test Modify
+        </button>
+        <button class="btn btn-outline-secondary" onClick={() => moveToList()}>
+          Test Move List
+        </button>
+      </div>
+    </Container>
+  );
+};
+
+export default ReadPage;
