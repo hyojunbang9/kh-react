@@ -8,6 +8,7 @@ import {
   useSearchParams,
   createSearchParams,
 } from "react-router-dom";
+import ReadComponent from "./../../component/todo/ReadComponent";
 
 const ReadPage = () => {
   const { tno } = useParams();
@@ -36,21 +37,7 @@ const ReadPage = () => {
   return (
     <Container>
       <Header />
-      To do ReadPage {tno}
-      <div class="d-grid col-6 mx-auto">
-        <button
-          class="btn btn-outline-success"
-          type="button"
-          onClick={() => {
-            moveToModify(tno);
-          }}
-        >
-          Move Test Modify
-        </button>
-        <button class="btn btn-outline-secondary" onClick={() => moveToList()}>
-          Test Move List
-        </button>
-      </div>
+      <ReadComponent tno={tno} />
     </Container>
   );
 };
