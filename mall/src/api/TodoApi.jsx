@@ -25,10 +25,22 @@ export const getList = async (pageParam) => {
 };
 
 //삽입
+export const postAdd = async (todoObj) => {
+  const result = await axios.post(`${prefix}/`, todoObj);
+  return result.data;
+};
 
 //수정
+export const putOne = async (todo) => {
+  const result = await axios.put(`${prefix}/${todo.tno}`, todo);
+  return result.data;
+};
 
 //삭제
+export const deleteOne = async (tno) => {
+  const result = await axios.delete(`${prefix}/${tno}`);
+  return result.data;
+};
 
 const TodoApi = () => {
   return <div>todoApi</div>;
