@@ -34,6 +34,7 @@ const ListComponent = () => {
             <th>TNO</th>
             <th>TITLE</th>
             <th>DATE</th>
+            <th>WRITER</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +43,7 @@ const ListComponent = () => {
               <td className="text-center">{todo.tno}</td>
               <td>{todo.title}</td>
               <td>{todo.dueDate}</td>
+              <td>{todo.writer}</td>
             </tr>
           ))}
         </tbody>

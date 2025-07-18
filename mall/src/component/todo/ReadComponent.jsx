@@ -11,7 +11,7 @@ const initState = {
   complete: false,
 };
 
-const ReadComponent = ({ tno }) => {
+const ReadComponent = ({ tno, moveToList, moveToModify }) => {
   const [todo, setTodo] = useState(initState);
 
   useEffect(() => {
@@ -63,6 +63,26 @@ const ReadComponent = ({ tno }) => {
             />
           </Form.Group>
         </Form>
+        <div className="d-flex justify-content-center gap-2 mt-5">
+          <button
+            className="btn btn-secondary"
+            type="button"
+            onClick={() => {
+              moveToModify(tno);
+            }}
+          >
+            수정하기
+          </button>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => {
+              moveToList();
+            }}
+          >
+            목록가기
+          </button>
+        </div>
       </Container>
     </>
   );
