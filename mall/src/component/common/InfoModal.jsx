@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Button, Form, Container } from "react-bootstrap";
 
 const InfoModal = ({ show, onHide, title, content, callbackFn }) => {
@@ -11,7 +10,7 @@ const InfoModal = ({ show, onHide, title, content, callbackFn }) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>

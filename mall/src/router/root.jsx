@@ -2,12 +2,19 @@ import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Loading from "../page/Loading";
 
-const ReadPage = lazy(() => import("../page/todo/ReadPage"));
-const ModifyPage = lazy(() => import("../page/todo/ModifyPage"));
-const AddPage = lazy(() => import("../page/todo/AddPage"));
-const ListPage = lazy(() => import("../page/todo/ListPage"));
+//main page
 const AboutPage = lazy(() => import("../page/AboutPage"));
 const MainPage = lazy(() => import("../page/MainPage"));
+//todo page
+const ReadPage = lazy(() => import("../page/todo/ReadPage"));
+const ModifyPage = lazy(() => import("../page/todo/ModifyPage"));
+const ListPage = lazy(() => import("../page/todo/ListPage"));
+const AddPage = lazy(() => import("../page/todo/AddPage"));
+//product page
+const ProductListPage = lazy(() => import("../page/product/ListPage"));
+const ProductAddPage = lazy(() => import("../page/product/AddPage"));
+const ProductReadPage = lazy(() => import("../page/product/ReadPage"));
+const ProductModifyPage = lazy(() => import("../page/product/ModifyPage"));
 
 const root = createBrowserRouter([
   {
@@ -26,6 +33,7 @@ const root = createBrowserRouter([
       </Suspense>
     ),
   },
+  //todo -----------------------------
   {
     path: "/todo/list",
     element: (
@@ -55,6 +63,39 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <ModifyPage />
+      </Suspense>
+    ),
+  },
+  //product -----------------------------
+  {
+    path: "/product/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductListPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/product/add",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductAddPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/product/read/:pno",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductReadPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/product/modify/:pno",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductModifyPage />
       </Suspense>
     ),
   },

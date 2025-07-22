@@ -23,6 +23,20 @@ const Header = () => {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">예비용</NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown
+              title="PRODUCTS"
+              className="bg-body-primary"
+              bg="primary"
+            >
+              <NavDropdown.Item href="/product/list">LIST</NavDropdown.Item>
+              <NavDropdown.Item href="/product/add">ADD</NavDropdown.Item>
+              <NavDropdown.Item href="/product/read/3">READ</NavDropdown.Item>
+              <NavDropdown.Item href="/product/modify/5">
+                MODIFY
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">예비용</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Nav>
             <Nav.Link href="#deets">Login</Nav.Link>
