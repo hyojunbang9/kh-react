@@ -20,8 +20,10 @@ const ModifyComponent = ({ pno }) => {
   const [product, setProduct] = useState(initState);
   const [fetching, setFetching] = useState(false);
   const uploadRef = useRef();
+
   //결과 모달
   const [result, setResult] = useState(null);
+
   //이동용 함수
   const { moveToProductRead, moveToProductList } = useCustomMove();
   useEffect(() => {
@@ -31,10 +33,12 @@ const ModifyComponent = ({ pno }) => {
       setFetching(false);
     });
   }, [pno]);
+
   const handleChangeProduct = (e) => {
     product[e.target.name] = e.target.value;
     setProduct({ ...product });
   };
+
   const deleteOldImages = (imageName) => {
     const resultFileNames = product.uploadFileNames.filter(
       (fileName) => fileName !== imageName
@@ -42,7 +46,9 @@ const ModifyComponent = ({ pno }) => {
     product.uploadFileNames = resultFileNames;
     setProduct({ ...product });
   };
+
   const handleClickModify = () => {
+    console.log("수정 버튼 클릭됨");
     const files = uploadRef.current.files;
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
@@ -63,13 +69,22 @@ const ModifyComponent = ({ pno }) => {
       setFetching(false);
     });
   };
+
   const handleClickDelete = () => {
+    console.log("삭제 버튼 클릭됨");
     setFetching(true);
-    deleteOne(pno).then((data) => {
-      setResult("Deleted");
-      setFetching(false);
-    });
+    deleteOne(pno)
+      .then((data) => {
+        console.log("삭제 성공", data);
+        setFetching(false);
+        setResult("Deleted");
+      })
+      .catch((err) => {
+        console.error("삭제 에러", err);
+        setFetching(false);
+      });
   };
+
   const closeModal = () => {
     if (result === "Modified") {
       moveToProductRead(pno); // 조회 화면으로 이동
@@ -83,6 +98,7 @@ const ModifyComponent = ({ pno }) => {
       {fetching ? <FetchingModal /> : <></>}
       {result ? (
         <ResultModal
+          show={true}
           title={`${result}`}
           content={"정상적으로 처리되었습니다."} //결과 모달창
           callbackFn={closeModal}
