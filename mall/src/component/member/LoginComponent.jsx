@@ -1,10 +1,7 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { FloatingLabel, Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../../slices/loginSlice";
-import { loginPostAsync } from "../../slices/loginSlice";
 import useCustomLogin from "../../hooks/useCustomLogin";
+import KakaoLoginComponent from "./KakaoLoginComponent";
 
 const initState = {
   email: "",
@@ -13,8 +10,6 @@ const initState = {
 export default function LoginComponent() {
   const [loginParam, setLoginParam] = useState({ ...initState });
   const { doLogin, moveToPath } = useCustomLogin();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     loginParam[e.target.name] = e.target.value;
@@ -65,6 +60,7 @@ export default function LoginComponent() {
           로그인
         </Button>
       </div>
+      <KakaoLoginComponent />
     </>
   );
 }

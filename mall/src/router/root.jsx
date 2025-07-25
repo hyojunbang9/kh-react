@@ -15,6 +15,8 @@ const ProductListPage = lazy(() => import("../page/product/ListPage"));
 const ProductAddPage = lazy(() => import("../page/product/AddPage"));
 const ProductReadPage = lazy(() => import("../page/product/ReadPage"));
 const ProductModifyPage = lazy(() => import("../page/product/ModifyPage"));
+//kakao page
+const KakaoRedirect = lazy(() => import("../page/member/KakaoRedirectPage"));
 
 const LoginPage = lazy(() => import("../page/member/LoginPage"));
 const LogoutPage = lazy(() => import("../page/member/LogoutPage"));
@@ -116,6 +118,15 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <LogoutPage />
+      </Suspense>
+    ),
+  },
+  //kakao -----------------------------
+  {
+    path: "/member/kakao",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <KakaoRedirect />
       </Suspense>
     ),
   },
