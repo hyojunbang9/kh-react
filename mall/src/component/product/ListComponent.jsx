@@ -5,6 +5,7 @@ import { Container, Card, Row } from "react-bootstrap";
 import FetchingModal from "../common/FetchingModal";
 import { API_SERVER_HOST } from "../../api/todoApi";
 import PageComponent from "../common/PageComponent";
+import useCustomLogin from "../../hooks/useCustomLogin";
 
 const host = API_SERVER_HOST;
 
@@ -26,17 +27,17 @@ const ListComponent = () => {
     useCustomMove();
   const [serverData, setServerData] = useState(initState);
   const [fetching, setFetching] = useState(false);
+  const { exceptionHandle } = useCustomLogin();
 
   useEffect(() => {
     setFetching(true);
     getList({ page, size })
       .then((data) => {
+        console.log(data);
         setServerData(data);
         setFetching(false);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => exceptionHandle(err));
   }, [page, size, refresh]);
 
   return (

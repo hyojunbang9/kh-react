@@ -3,13 +3,17 @@ import { FloatingLabel, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/loginSlice";
+import { loginPostAsync } from "../../slices/loginSlice";
+import useCustomLogin from "../../hooks/useCustomLogin";
+
 const initState = {
   email: "",
   pw: "",
 };
 export default function LoginComponent() {
   const [loginParam, setLoginParam] = useState({ ...initState });
-  const nav = useNavigate();
+  const { doLogin, moveToPath } = useCustomLogin();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -18,7 +22,17 @@ export default function LoginComponent() {
   };
 
   const handleClickLogin = (e) => {
-    dispatch(login(loginParam));
+    doLogin(loginParam)
+      // loginSlice 의 비동기 호출
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          alert("이메일과 패스워드를 다시 확인하세요");
+        } else {
+          alert("로그인 성공");
+          moveToPath("/");
+        }
+      });
   };
 
   return (
