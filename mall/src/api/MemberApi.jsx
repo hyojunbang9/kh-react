@@ -1,7 +1,13 @@
 import axios from "axios";
 import { API_SERVER_HOST } from "./todoApi";
+import jwtAxios from "../util/jwtUtil";
 
 const host = `${API_SERVER_HOST}/api/member`;
+
+export const modifyMember = async (member) => {
+  const res = await jwtAxios.put(`${host}/modify`, member);
+  return res.data;
+};
 
 export const loginPost = async (loginParam) => {
   // Content-Type을 x-www-form-urlencoded로 지정하여, 폼 데이터를 보내겠다는 의미이다.

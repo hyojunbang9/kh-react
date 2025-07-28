@@ -26,13 +26,11 @@ const loginSlice = createSlice({
   initialState: loadMemberCookie() || initState, // 쿠키가 없으면 초기값 사용
   reducers: {
     login: (state, action) => {
-      console.log("로그인 ..................");
-
-      //{email, pw 로 구성 }
-      const data = action.payload;
-
-      //새로운 상태
-      return { email: data.email };
+      console.log("login. ....");
+      //{소셜로그인 회원이 사용}
+      const payload = action.payload;
+      setCookie("member", JSON.stringify(payload), 1); //1 일
+      return payload;
     },
     logout: (state, action) => {
       console.log("로그아웃 ...............");

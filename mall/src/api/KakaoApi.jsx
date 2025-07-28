@@ -7,7 +7,7 @@ const auth_code_path = ``;
 //엑세스 토큰 얻기
 const access_token_url = ``;
 //보안코드 활성화시 사용
-const client_secret = `Client Secret : `;
+const client_secret = ``;
 
 //https://kauth.kakao.com/oauth/authorize + ?client_id=${rest_api_key}&redirect_uri=${redirect_uri}&response_type=code 형식
 export const getKakaoLoginLink = () => {
