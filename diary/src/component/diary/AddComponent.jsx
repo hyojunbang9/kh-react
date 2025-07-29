@@ -9,7 +9,7 @@ const initState = { title: "", writer: "", dueDate: "" };
 export default function AddComponent() {
   const [diary, setdiary] = useState({ ...initState });
   const [result, setResult] = useState(null);
-  const { moveToList } = useCustomMove();
+  const { moveToList } = useMyMove();
   const [infoModalOn, setInfoModalOn] = useState(false);
   const handleChangediary = (e) => {
     diary[e.target.name] = e.target.value;

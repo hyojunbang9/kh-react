@@ -7,7 +7,7 @@ export default function AddPage() {
     <Container>
       <Header />
       Todo Add Page
-      {/*<AddComponent /> */}
+      <AddComponent />
     </Container>
   );
 }
