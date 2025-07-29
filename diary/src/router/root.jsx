@@ -4,10 +4,10 @@ import Loading from "../page/Loading";
 
 const MainPage = lazy(() => import("../page/MainPage"));
 const About = lazy(() => import("../page/AboutPage"));
-const ListPage = lazy(() => import("../page/todo/ListPage"));
-const ReadPage = lazy(() => import("../page/todo/ReadPage"));
-const AddPage = lazy(() => import("../page/todo/AddPage"));
-const ModifyPage = lazy(() => import("../page/todo/ModifyPage"));
+const ListPage = lazy(() => import("../page/diary/ListPage"));
+const ReadPage = lazy(() => import("../page/diary/ReadPage"));
+const AddPage = lazy(() => import("../page/diary/AddPage"));
+const ModifyPage = lazy(() => import("../page/diary/ModifyPage"));
 
 const root = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/todo/list",
+    path: "/diary/list",
     element: (
       <Suspense fallback={<Loading />}>
         <ListPage />
@@ -35,7 +35,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/todo/read/:tno",
+    path: "/diary/read/:dno",
     element: (
       <Suspense fallback={<Loading />}>
         <ReadPage />
@@ -43,7 +43,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/todo/add",
+    path: "/diary/add",
     element: (
       <Suspense fallback={<Loading />}>
         <AddPage />
@@ -51,7 +51,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/todo/modify/:tno",
+    path: "/diary/modify/:dno",
     element: (
       <Suspense fallback={<Loading />}>
         <ModifyPage />

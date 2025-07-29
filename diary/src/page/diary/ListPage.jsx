@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import Header from "../../include/Header";
 import { useSearchParams } from "react-router-dom";
+import ListComponent from "../../component/diary/ListComponent";
 
 const ListPage = () => {
   const [queryParams] = useSearchParams();
@@ -11,7 +12,7 @@ const ListPage = () => {
     <Container>
       <Header />
       <div className="d-grid gap-2 mt-5">
-        Todo List Page Components {page}---{size}
+        <ListComponent />
       </div>
     </Container>
   );
