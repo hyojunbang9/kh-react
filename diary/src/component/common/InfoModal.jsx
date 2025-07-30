@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Button, Form, Container } from "react-bootstrap";
 
 const InfoModal = ({ show, onHide, title, content, callbackFn }) => {

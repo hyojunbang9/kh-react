@@ -1,16 +1,23 @@
 import { useState, React } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import useCustomMove from "../../hooks/useMyMove";
+import useMyMove from "../../hooks/useMyMove";
 import { postAdd } from "../../api/diaryApi";
 import InfoModal from "../common/InfoModal";
 
-const initState = { title: "", writer: "", dueDate: "" };
+const initState = {
+  dtitle: "",
+  dwriter: "",
+  dcontent: "",
+  dweather: "",
+  ddate: "",
+};
 
 export default function AddComponent() {
   const [diary, setdiary] = useState({ ...initState });
   const [result, setResult] = useState(null);
   const { moveToList } = useMyMove();
   const [infoModalOn, setInfoModalOn] = useState(false);
+
   const handleChangediary = (e) => {
     diary[e.target.name] = e.target.value;
     setdiary({ ...diary });
@@ -46,33 +53,53 @@ export default function AddComponent() {
       />
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>TITLE</Form.Label>
+          <Form.Label>dtitle</Form.Label>
           <Form.Control
-            name="title"
+            name="dtitle"
             type="text"
-            value={diary.title}
+            value={diary.dtitle}
             onChange={handleChangediary}
-            placeholder="Enter Title"
+            placeholder="Enter dtitle"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>WRITER</Form.Label>
+          <Form.Label>dwriter</Form.Label>
           <Form.Control
-            name="writer"
+            name="dwriter"
             type="text"
-            value={diary.writer}
+            value={diary.dwriter}
             onChange={handleChangediary}
-            placeholder="Enter Writer"
+            placeholder="Enter dwriter"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>dcontent</Form.Label>
+          <Form.Control
+            name="dcontent"
+            type="text"
+            value={diary.dcontent}
+            onChange={handleChangediary}
+            placeholder="Enter dcontent"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>dweather</Form.Label>
+          <Form.Control
+            name="dweather"
+            type="text"
+            value={diary.dweather}
+            onChange={handleChangediary}
+            placeholder="Enter dweather"
           />
         </Form.Group>
         <Form.Group className="mb-5">
-          <Form.Label>DUEDATE</Form.Label>
+          <Form.Label>ddate</Form.Label>
           <Form.Control
-            name="dueDate"
+            name="ddate"
             type="date"
-            value={diary.dueDate}
+            value={diary.ddate}
             onChange={handleChangediary}
-            placeholder="Enter dueDate"
+            placeholder="Enter ddate"
           />
         </Form.Group>
       </Form>

@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import Header from "../../include/Header";
 import { useParams } from "react-router-dom";
 import ModifyComponent from "../../component/diary/ModifyComponent";
-import useCustomMove from "../../hooks/useCustomMove";
+import useMyMove from "../../hooks/useMyMove";
 
 const ModifyPage = () => {
   const { dno } = useParams();

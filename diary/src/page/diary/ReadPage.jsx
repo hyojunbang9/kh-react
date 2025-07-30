@@ -5,14 +5,14 @@ import ReadComponent from "../../component/diary/ReadComponent";
 import useMyMove from "../../hooks/useMyMove";
 
 const ReadPage = () => {
-  const { tno } = useParams();
+  const { dno } = useParams();
   const { moveToList, moveToModify } = useMyMove();
 
   return (
     <Container>
       <Header />
       <ReadComponent
-        tno={tno}
+        dno={dno}
         moveToList={moveToList}
         moveToModify={moveToModify}
       />

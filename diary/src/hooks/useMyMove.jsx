@@ -32,6 +32,11 @@ const useMyMove = () => {
     } else {
       queryStr = queryDefault;
     }
+    navigate({
+      pathname: `../diary/list`,
+      search: queryStr,
+    });
+    setRefresh(!refresh); //추가
   };
 
   const moveToMomentList = (pageParam) => {
@@ -48,7 +53,7 @@ const useMyMove = () => {
     }
 
     navigate({
-      pathname: `../diary/list`,
+      pathname: `../moment/list`,
       search: queryStr,
     });
     setRefresh(!refresh); //추가

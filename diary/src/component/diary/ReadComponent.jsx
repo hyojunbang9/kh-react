@@ -5,19 +5,22 @@ import Form from "react-bootstrap/Form";
 
 const initState = {
   dno: 0,
-  title: "",
-  writer: "",
-  dueDate: null,
-  complete: false,
+  dtitle: "",
+  dwriter: "",
+  dcontent: "",
+  dweather: "",
+  ddate: null,
 };
 const ReadComponent = ({ dno, moveToList, moveToModify }) => {
   const [diary, setDiary] = useState(initState);
+
   useEffect(() => {
     getOne(dno).then((data) => {
       console.log(data);
       setDiary(data);
     });
   }, [dno]);
+
   return (
     <Container className="p-5">
       <Form>
@@ -31,31 +34,40 @@ const ReadComponent = ({ dno, moveToList, moveToModify }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>WRITER</Form.Label>
+          <Form.Label>dtitle</Form.Label>
           <Form.Control
-            value={diary.writer}
+            value={diary.dtitle}
             type="text"
-            placeholder="Enter writer"
+            placeholder="Enter dwriter"
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>TITLE</Form.Label>
+          <Form.Label>dwriter</Form.Label>
           <Form.Control
             type="text"
-            value={diary.title}
-            placeholder="Enter title"
+            value={diary.dwriter}
+            placeholder="Enter dwriter"
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>DATE</Form.Label>
-          <Form.Control value={diary.dueDate} type="text" disabled />
+          <Form.Label>dcontent</Form.Label>
+          <Form.Control
+            type="text"
+            value={diary.dcontent}
+            placeholder="Enter dcontent"
+          />
         </Form.Group>
         <Form.Group>
-          <Form.Label>COMPLETE</Form.Label>
+          <Form.Label>dweather</Form.Label>
           <Form.Control
-            value={diary.complete ? "Completed" : "Not Yet"}
             type="text"
+            value={diary.dweather}
+            placeholder="Enter dweather"
           />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>ddate</Form.Label>
+          <Form.Control value={diary.ddate} type="text" disabled />
         </Form.Group>
       </Form>
       <div className="d-flex justify-content-center gap-2 mt-5">

@@ -6,10 +6,11 @@ import InfoModal from "../common/InfoModal";
 
 const initState = {
   dno: 0,
-  title: "",
-  writer: "",
-  dueDate: "",
-  complete: false,
+  dtitle: "",
+  dwriter: "",
+  dcontent: "",
+  dweather: "",
+  ddate: null,
 };
 
 const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
@@ -17,33 +18,28 @@ const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
   const [infoModalOn, setInfoModalOn] = useState(false);
   const [result, setResult] = useState(null); //모달 창을 위한 상태
 
+  useEffect(() => {
+    getOne(dno).then((data) => setDiary(data));
+  }, [dno]);
+
+  // 수정 버튼 클릭시
   const handleClickModify = () => {
-    // 수정 버튼 클릭시
     putOne(diary).then((data) => {
       setResult(data.RESULT);
       setInfoModalOn(true);
     });
   };
+
+  // 삭제 버튼 클릭시
   const handleClickDelete = () => {
-    // 삭제 버튼 클릭시
-    deleteOne(diary).then((data) => {
+    deleteOne(dno).then((data) => {
       setResult(data.RESULT);
       setInfoModalOn(true);
     });
   };
 
-  useEffect(() => {
-    getOne(dno).then((data) => setDiary(data));
-  }, [dno]);
-
   const handleChangeDiary = (e) => {
     diary[e.target.name] = e.target.value;
-    setDiary({ ...diary });
-  };
-
-  const handleChangeDiaryComplete = (e) => {
-    const value = e.target.value;
-    diary.complete = value === "Y" ? "true" : "false";
     setDiary({ ...diary });
   };
 
@@ -55,6 +51,12 @@ const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
 
   return (
     <Container className="p-5">
+      <InfoModal
+        show={infoModalOn}
+        title={`RESULT`}
+        content={`${result}`}
+        callbackFn={closeModal}
+      />
       <Form>
         <Form.Group className="mb-3">
           <Form.Label>dno</Form.Label>
@@ -66,43 +68,52 @@ const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>WRITER</Form.Label>
+          <Form.Label>dtitle</Form.Label>
           <Form.Control
-            value={diary.writer}
             type="text"
-            placeholder="Enter writer"
+            name="dtitle"
+            value={diary.dtitle}
+            placeholder="Enter dtitle"
+            onChange={handleChangeDiary}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>dwriter</Form.Label>
+          <Form.Control
+            value={diary.dwriter}
+            type="text"
+            placeholder="Enter dwriter"
             disabled
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>TITLE</Form.Label>
+          <Form.Label>dcontent</Form.Label>
           <Form.Control
-            type="text"
-            name="title"
-            value={diary.title}
-            placeholder="Enter title"
+            type="textarea"
+            name="dtitle"
+            value={diary.dcontent}
+            placeholder="Enter dcontent"
             onChange={handleChangeDiary}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>DATE</Form.Label>
+          <Form.Label>dweather</Form.Label>
           <Form.Control
-            name="dueDate"
-            value={diary.dueDate}
+            type="text"
+            name="dweather"
+            value={diary.dweather}
+            placeholder="Enter dweather"
+            onChange={handleChangeDiary}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>ddate</Form.Label>
+          <Form.Control
+            name="ddate"
+            value={diary.ddate}
             type="date"
             onChange={handleChangeDiary}
           />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>COMPLETE</Form.Label>
-          <Form.Select
-            name="status"
-            value={diary.complete ? "Completed" : "Not Yet"}
-            onChange={handleChangeDiaryComplete}
-          >
-            <option value="Y">Completed</option>
-            <option value="N">Not Yet</option>
-          </Form.Select>
         </Form.Group>
       </Form>
       <div className="d-flex justify-content-center gap-2 mt-5">
@@ -120,14 +131,16 @@ const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
         >
           삭제하기
         </button>
-        목록가기
+
         <button
           className="btn btn-primary"
           type="text"
           onClick={() => {
             moveToList();
           }}
-        ></button>
+        >
+          목록가기
+        </button>
       </div>
     </Container>
   );
