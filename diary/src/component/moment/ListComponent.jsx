@@ -54,6 +54,7 @@ const ListComponent = () => {
                   <Card.Title>제목 : {moment.mtitle}</Card.Title>
                   <Card.Title>내용 : {moment.mcontent}</Card.Title>
                   <Card.Title>위치 : {moment.mlocation}</Card.Title>
+                  <Card.Title>{moment.mdate}</Card.Title>
                   <Card.Text></Card.Text>
                 </Card.Body>
                 <img
