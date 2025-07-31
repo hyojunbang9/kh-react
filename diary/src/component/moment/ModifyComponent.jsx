@@ -46,6 +46,14 @@ const ModifyComponent = ({ mno }) => {
     setMoment({ ...moment });
   };
 
+  const handleClickDelete = () => {
+    setFetching(true);
+    deleteOne(mno).then((data) => {
+      setResult("Deleted");
+      setFetching(false);
+    });
+  };
+
   const handleClickModify = () => {
     const files = uploadRef.current.files;
     const formData = new FormData();
@@ -56,7 +64,7 @@ const ModifyComponent = ({ mno }) => {
     //other data
     formData.append("mtitle", moment.mtitle);
     formData.append("mcontent", moment.mcontent);
-    formData.append("mlocation", moment.mlocationㄴ);
+    formData.append("mlocation", moment.mlocation);
     formData.append("mdate", moment.mdate);
     for (let i = 0; i < moment.uploadFileNames.length; i++) {
       formData.append("uploadFileNames", moment.uploadFileNames[i]);
@@ -70,13 +78,6 @@ const ModifyComponent = ({ mno }) => {
     });
   };
 
-  const handleClickDelete = () => {
-    setFetching(true);
-    deleteOne(mno).then((data) => {
-      setResult("Deleted");
-      setFetching(false);
-    });
-  };
   const closeModal = () => {
     if (result === "Modified") {
       moveToMomentRead(mno); // 조회 화면으로 이동
@@ -91,14 +92,24 @@ const ModifyComponent = ({ mno }) => {
       {fetching ? <FetchingModal /> : <></>}
       {result ? (
         <InfoModal
+          show={true}
           title={`${result}`}
-          content={"정상적으로 처리되었습니다."} //결과 모달창
+          content={"정상적으로 처리되었습니다."}
           callbackFn={closeModal}
         />
       ) : (
         <></>
       )}
       <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>MNO</Form.Label>
+          <Form.Control
+            value={mno}
+            type="text"
+            placeholder="Enter mno"
+            disabled
+          />
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>mtitle</Form.Label>
           <Form.Control
@@ -108,6 +119,31 @@ const ModifyComponent = ({ mno }) => {
             placeholder="Enter mtitle"
             onChange={handleChangeMoment}
           />
+          <Row className="d-flex justify-content-center mt-5 gap-4">
+            {moment.uploadFileNames.map((imgFile, i) => (
+              <>
+                <Card style={{ width: "14rem", height: "14rem" }} key={i}>
+                  <Button
+                    variant="primary"
+                    onClick={() => deleteOldImages(imgFile)}
+                  >
+                    DELETE
+                  </Button>
+                  <Card.Body>
+                    <img
+                      alt="img"
+                      style={{ width: "10rem" }}
+                      src={`${prefix}/api/moment/view/s_${imgFile} `}
+                    />
+                  </Card.Body>
+                </Card>
+              </>
+            ))}
+          </Row>
+          <Form.Group className="mb-3">
+            <Form.Label>Files</Form.Label>
+            <Form.Control ref={uploadRef} type="file" multiple="true" />
+          </Form.Group>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>mcontent</Form.Label>
@@ -123,20 +159,12 @@ const ModifyComponent = ({ mno }) => {
           <Form.Label>mlocation</Form.Label>
           <Form.Control
             name="mlocation"
-            defaultValue={moment.mlocation}
-            as="text"
+            value={moment.mlocation}
+            type="text"
             onChange={handleChangeMoment}
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>DELETE</Form.Label>
-          <Button
-            variant="danger"
-            onClick={() => handleChangeMoment(moment.mno)}
-          >
-            삭제
-          </Button>
-        </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>DATE</Form.Label>
           <Form.Control
@@ -146,53 +174,29 @@ const ModifyComponent = ({ mno }) => {
             onChange={handleChangeMoment}
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Files</Form.Label>
-          <Form.Control ref={uploadRef} type="file" multiple="true" />
-        </Form.Group>
       </Form>
-      <Row className="d-flex justify-content-center mt-5 gap-4">
-        {moment.uploadFileNames.map((imgFile, i) => (
-          <>
-            <Card style={{ width: "14rem", height: "14rem" }} key={i}>
-              <Button
-                variant="primary"
-                onClick={() => deleteOldImages(imgFile)}
-              >
-                DELETE
-              </Button>
-              <Card.Body>
-                <img
-                  alt="img"
-                  style={{ width: "10rem" }}
-                  src={`${prefix}/api/moments/view/s_${imgFile} `}
-                />
-              </Card.Body>
-            </Card>
-          </>
-        ))}
-      </Row>
+
       <div className="d-flex justify-content-center gap-2 mt-5">
         <button
           className="btn btn-outline-secondary"
           type="button"
           onClick={handleClickDelete}
         >
-          DELETE
+          삭제하기
         </button>
         <button
           className="btn btn-danger"
           type="button"
           onClick={handleClickModify}
         >
-          MODIFY
+          수정하기
         </button>
         <button
           className="btn btn-primary"
-          type="text"
+          type="button"
           onClick={moveToMomentList}
         >
-          LIST
+          목록가기
         </button>
       </div>
     </Container>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getList } from "../../api/momentApi";
-import { Container } from "react-bootstrap";
+import { Container, Row, Card } from "react-bootstrap";
 import useMyMove from "../../hooks/useMyMove";
 import FetchingModal from "../common/FetchingModal";
 import { API_SERVER_HOST } from "../../api/diaryApi";
@@ -25,8 +25,8 @@ const ListComponent = () => {
   const { page, size, moveToMomentList, moveToMomentRead, refresh } =
     useMyMove();
   const [serverData, setServerData] = useState(initState);
-  //for FetchingModal
   const [fetching, setFetching] = useState(false);
+
   useEffect(() => {
     setFetching(true);
     getList({ page, size }).then((data) => {
@@ -35,6 +35,7 @@ const ListComponent = () => {
       setFetching(false);
     });
   }, [page, size, refresh]);
+
   return (
     <>
       <Container className="px-5 justify-content-center mb-5">
@@ -45,8 +46,8 @@ const ListComponent = () => {
               <Card
                 className="p-3"
                 style={{ width: "14rem", height: "20rem" }}
-                key={moment.pno}
-                onClick={() => moveToMomentRead(moment.pno)}
+                key={moment.mno}
+                onClick={() => moveToMomentRead(moment.mno)}
               >
                 <Card.Body>
                   <Card.Title>일기 번호 :{moment.mno}</Card.Title>

@@ -83,7 +83,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/moment/read/:pno",
+    path: "/moment/read/:mno",
     element: (
       <Suspense fallback={<Loading />}>
         <MomentReadPage />
@@ -91,7 +91,7 @@ const root = createBrowserRouter([
     ),
   },
   {
-    path: "/moment/modify/:pno",
+    path: "/moment/modify/:mno",
     element: (
       <Suspense fallback={<Loading />}>
         <MomentModifyPage />

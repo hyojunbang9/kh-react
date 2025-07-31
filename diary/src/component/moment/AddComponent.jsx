@@ -35,15 +35,21 @@ export default function AddComponent() {
     //other data
     formData.append("mtitle", moment.mtitle);
     formData.append("mcontent", moment.mcontent);
-    formData.append("mdate", moment.mdate);
     formData.append("mlocation", moment.mlocation);
+    formData.append("mdate", moment.mdate);
     console.log(formData);
     setFetching(true);
 
-    postAdd(formData).then((data) => {
-      setFetching(false);
-      setResult(data.result);
-    });
+    postAdd(formData)
+      .then((data) => {
+        setFetching(false);
+        setResult(data.RESULT);
+      })
+      .catch((err) => {
+        console.error("등록 실패:", err);
+        setFetching(false);
+        alert("등록 중 문제가 발생했습니다.");
+      });
   };
 
   const closeModal = () => {
@@ -106,7 +112,7 @@ export default function AddComponent() {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Files</Form.Label>
-          <Form.Control ref={uploadRef} type="file" multiple="true" />
+          <Form.Control ref={uploadRef} type="file" multiple />
         </Form.Group>
       </Form>
       <div className="d-flex justify-content-center gap-2 ">

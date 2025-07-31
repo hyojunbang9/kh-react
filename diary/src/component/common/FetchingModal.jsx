@@ -11,7 +11,7 @@ export default function FetchingModal() {
           <Modal.Title>MESSAGE</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Loading ......</p>
+          <p>Loading ...</p>
         </Modal.Body>
       </Modal.Dialog>
     </div>

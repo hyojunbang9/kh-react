@@ -20,6 +20,7 @@ const ReadComponent = ({ mno }) => {
   const [moment, setMoment] = useState(initState);
   const { moveToMomentList, moveToMomentModify } = useCustomMove(); //화면 이동용 함수
   const [fetching, setFetching] = useState(false); //fetching
+
   useEffect(() => {
     setFetching(true);
     getOne(mno).then((data) => {
@@ -50,6 +51,16 @@ const ReadComponent = ({ mno }) => {
             disabled
           />
         </Form.Group>
+        <Form.Group className="mb-3 d-flex justify-content-center">
+          {moment.uploadFileNames.map((imgFile, i) => (
+            <img
+              alt="moment"
+              key={i}
+              style={{ width: "14rem", height: "14rem" }}
+              src={`${prefix}/api/moment/view/s_${imgFile}`}
+            />
+          ))}
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>mcontent</Form.Label>
           <Form.Control
@@ -68,16 +79,7 @@ const ReadComponent = ({ mno }) => {
             disabled
           />
         </Form.Group>
-        <Form.Group className="mb-3 d-flex justify-content-center">
-          {moment.uploadFileNames.map((imgFile, i) => (
-            <img
-              alt="moment"
-              key={i}
-              style={{ width: "14rem", height: "14rem" }}
-              src={`${prefix}/api/moment/view/s_${imgFile}`}
-            />
-          ))}
-        </Form.Group>
+
         <Form.Group>
           <Form.Label>DATE</Form.Label>
           <Form.Control defaultValue={moment.mdate} type="text" disabled />
@@ -99,8 +101,9 @@ const ReadComponent = ({ mno }) => {
           onClick={() => {
             moveToMomentList();
           }}
-        ></button>
-        리스트보기
+        >
+          리스트보기
+        </button>
       </div>
     </Container>
   );
