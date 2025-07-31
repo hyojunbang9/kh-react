@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Loading from "../page/Loading";
 
 const MainPage = lazy(() => import("../page/MainPage"));
-const About = lazy(() => import("../page/AboutPage"));
 
 const ListPage = lazy(() => import("../page/diary/ListPage"));
 const ReadPage = lazy(() => import("../page/diary/ReadPage"));
@@ -15,20 +14,17 @@ const MomentAddPage = lazy(() => import("../page/moment/AddPage"));
 const MomentReadPage = lazy(() => import("../page/moment/ReadPage"));
 const MomentModifyPage = lazy(() => import("../page/moment/ModifyPage"));
 
+const TodoListPage = lazy(() => import("../page/todo/ListPage"));
+const TodoAddPage = lazy(() => import("../page/todo/AddPage"));
+const TodoReadPage = lazy(() => import("../page/todo/ReadPage"));
+const TodoModifyPage = lazy(() => import("../page/todo/ModifyPage"));
+
 const root = createBrowserRouter([
   {
     path: "/",
     element: (
       <Suspense fallback={<Loading />}>
         <MainPage />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/about",
-    element: (
-      <Suspense fallback={<Loading />}>
-        <About />
       </Suspense>
     ),
   },
@@ -95,6 +91,40 @@ const root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <MomentModifyPage />
+      </Suspense>
+    ),
+  },
+  // todo =====================================
+
+  {
+    path: "/todo/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <TodoListPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/todo/read/:tno",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <TodoReadPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/todo/add",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <TodoAddPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/todo/modify/:tno",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <TodoModifyPage />
       </Suspense>
     ),
   },

@@ -59,6 +59,25 @@ const useMyMove = () => {
     setRefresh(!refresh); //추가
   };
 
+  const moveToTodoList = (pageParam) => {
+    let queryStr = "";
+    if (pageParam) {
+      const pageNum = getNum(pageParam.page, page);
+      const sizeNum = getNum(pageParam.size, size);
+      queryStr = createSearchParams({
+        page: pageNum,
+        size: sizeNum,
+      }).toString();
+    } else {
+      queryStr = queryDefault;
+    }
+    navigate({
+      pathname: `../todo/list`,
+      search: queryStr,
+    });
+    setRefresh(!refresh); //추가
+  };
+
   const moveToModify = (num) => {
     console.log(queryDefault);
     navigate({
@@ -72,6 +91,14 @@ const useMyMove = () => {
     navigate({
       pathname: `../moment/modify/${num}`,
       search: queryDefault, //수정시에 기존의 쿼리 스트링 유지
+    });
+  };
+
+  const moveToTodoModify = (num) => {
+    console.log(queryDefault);
+    navigate({
+      pathname: `../todo/modify/${num}`,
+      search: queryDefault, //수정시에 기존의 쿼리 스트링 유지를 위해
     });
   };
 
@@ -90,16 +117,26 @@ const useMyMove = () => {
     });
   };
 
+  const moveToTodoRead = (num) => {
+    navigate({
+      pathname: `../todo/read/${num}`,
+      search: queryDefault, //수정시에 기존의 쿼리 스트링 유지를 위해
+    });
+  };
+
   return {
-    moveToMomentList,
     moveToList,
+    moveToMomentList,
+    moveToTodoList,
     moveToModify,
     moveToMomentModify,
-    moveToMomentRead,
+    moveToTodoModify,
     moveToRead,
+    moveToMomentRead,
+    moveToTodoRead,
     page,
     size,
     refresh,
-  }; //moveToModify 추가
+  }; //MoveToTodo 추가
 };
 export default useMyMove;

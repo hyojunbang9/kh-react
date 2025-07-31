@@ -1,12 +1,12 @@
 import { Container } from "react-bootstrap";
 import Header from "../../include/Header";
-import AddComponent from "../../component/diary/AddComponent";
+import AddComponent from "../../component/todo/AddComponent";
 
 export default function AddPage() {
   return (
     <Container>
       <Header />
-      Diary Add Page
+      Todo Add Page
       <AddComponent />
     </Container>
   );
