@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getOne } from "../../api/diaryApi";
 import { Container } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import "./ReadComponent.css";
 
 const initState = {
   dno: 0,
@@ -23,53 +23,28 @@ const ReadComponent = ({ dno, moveToList, moveToModify }) => {
 
   return (
     <Container className="p-5">
-      <Form>
-        <Form.Group>
-          <Form.Label>DNO</Form.Label>
-          <Form.Control
-            value={diary.dno}
-            type="text"
-            placeholder="Enter no"
-            disabled
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>dtitle</Form.Label>
-          <Form.Control
-            value={diary.dtitle}
-            type="text"
-            placeholder="Enter dwriter"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>dwriter</Form.Label>
-          <Form.Control
-            type="text"
-            value={diary.dwriter}
-            placeholder="Enter dwriter"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>dcontent</Form.Label>
-          <Form.Control
-            type="text"
-            value={diary.dcontent}
-            placeholder="Enter dcontent"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>dweather</Form.Label>
-          <Form.Control
-            type="text"
-            value={diary.dweather}
-            placeholder="Enter dweather"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>ddate</Form.Label>
-          <Form.Control value={diary.ddate} type="text" disabled />
-        </Form.Group>
-      </Form>
+      <table>
+        <tr>
+          <th>{diary.dno}</th>
+          <th colSpan={9}>오늘의 일기</th>
+        </tr>
+        <tr>
+          <td colSpan={9}></td>
+          <td>{diary.dwriter}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colSpan={5}>{diary.dtitle}</td>
+        </tr>
+        <tr>
+          <td colSpan={5}>{diary.dweather}</td>
+          <td colSpan={5}>{diary.ddate}</td>
+        </tr>
+        <tr>
+          <td colSpan={7}>d</td>
+          <td colSpan={3}>d</td>
+        </tr>
+      </table>
       <div className="d-flex justify-content-center gap-2 mt-5">
         <button
           className="btn btn-secondary"
