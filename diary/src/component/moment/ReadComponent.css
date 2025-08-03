@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "diaryFont";
+  font-weight: normal;
+  src: url(./../../../src/font/나눔손글씨\ 김유이체.ttf);
+}
+
+table {
+  border: groove 10px black;
+  width: 100%;
+  text-align: center;
+}
+
+tr,
+td {
+  border: solid 1px black;
+  height: 5vh;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.content {
+  height: 70vh;
+  font-size: 2rem;
+}
+
+.titleLine {
+  border: solid 4px black;
+}
+
+.dateLine {
+  font-weight: 600;
+  font-size: 1.2rem;
+  border: solid 4px black;
+}
+
+/* Button styles for ReadComponent */
+.btn-primary {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.btn-secondary {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: #ffffff !important;
+}
+
+.read-container {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 3rem auto;
+  max-width: 600px;
+}
+
+.read-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: #212529;
+}
+
+.read-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.read-form .form-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.read-form .form-control {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.read-form .form-control:focus {
+  background-color: #ffffff;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.read-form .form-check-label {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.read-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}

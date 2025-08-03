@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getList } from "../../api/todoApi";
+import { getList, putOne } from "../../api/todoApi";
 import useMyMove from "../../hooks/useMyMove";
-import { Container, Table } from "react-bootstrap";
 import PageComponent from "../common/PageComponent";
+import "./ListComponent.css";
 
 const initState = {
   dtoList: [],
@@ -20,49 +20,48 @@ const initState = {
 const ListComponent = () => {
   const { page, size, moveToTodoList, moveToTodoRead, refresh } = useMyMove();
   const [serverData, setServerData] = useState(initState);
+
   useEffect(() => {
     getList({ page, size }).then((data) => {
-      console.log(data);
-      setServerData(data);
+      const sortedDtoList = data.dtoList.sort((a, b) => {
+        return new Date(b.dueDate) - new Date(a.dueDate);
+      });
+      setServerData({ ...data, dtoList: sortedDtoList });
     });
   }, [page, size, refresh]);
 
+  const handleDoneChange = async (tno, done) => {
+    const todo = serverData.dtoList.find((item) => item.tno === tno);
+    if (todo) {
+      await putOne({ ...todo, done: !done });
+      setServerData((prev) => ({
+        ...prev,
+        dtoList: prev.dtoList.map((item) =>
+          item.tno === tno ? { ...item, done: !done } : item
+        ),
+      }));
+    }
+  };
+
   return (
-    <Container className="px-5 justify-content-center">
-      <Table striped bordered hover size="lg">
-        <thead>
-          <tr className="text-center">
-            <th>tno</th>
-            <th>done</th>
-            <th>ttitle</th>
-            <th>twriter</th>
-            <th>tcontent</th>
-            <th>dueDate</th>
-          </tr>
-        </thead>
-        <tbody>
-          {serverData.dtoList.map((todo) => (
-            <tr
-              key={todo.tno}
-              onClick={() => {
-                console.log("페이지 클릭:", todo.tno);
-                moveToTodoRead(todo.tno);
-              }}
-            >
-              <td className="text-center">{todo.tno}</td>
-              <td className="text-center">
-                <input type="checkbox" checked={todo.done} disabled />
-              </td>
-              <td>{todo.ttitle}</td>
-              <td>{todo.twriter}</td>
-              <td>{todo.tcontent}</td>
-              <td>{todo.dueDate}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+    <div className="todo-list-container">
+      {serverData.dtoList.map((todo) => (
+        <div key={todo.tno} className="todo-note">
+          <div className="status">
+            <input
+              type="checkbox"
+              checked={todo.done}
+              onChange={() => handleDoneChange(todo.tno, todo.done)}
+            />
+          </div>
+          <div className="title" onClick={() => moveToTodoRead(todo.tno)}>
+            {todo.ttitle}
+          </div>
+          <div className="due-date">{todo.dueDate}</div>
+        </div>
+      ))}
       <PageComponent serverData={serverData} moveToList={moveToTodoList} />
-    </Container>
+    </div>
   );
 };
 export default ListComponent;

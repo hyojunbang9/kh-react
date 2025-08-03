@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { postAdd } from "../../api/momentApi";
 import FetchingModal from "../common/FetchingModal";
 import InfoModal from "../common/InfoModal";
 import useMyMove from "../../hooks/useMyMove";
+import "./AddComponent.css";
 
 const initState = {
   mtitle: "",
@@ -15,7 +16,7 @@ const initState = {
 
 export default function AddComponent() {
   const [moment, setMoment] = useState({ ...initState });
-  const uploadRef = useRef(); //type =”file” 위치
+  const uploadRef = useRef();
   const [fetching, setFetching] = useState(false);
   const [result, setResult] = useState(null);
   const { moveToMomentList } = useMyMove();
@@ -32,12 +33,10 @@ export default function AddComponent() {
       formData.append("files", files[i]);
     }
 
-    //other data
     formData.append("mtitle", moment.mtitle);
     formData.append("mcontent", moment.mcontent);
     formData.append("mlocation", moment.mlocation);
     formData.append("mdate", moment.mdate);
-    console.log(formData);
     setFetching(true);
 
     postAdd(formData)
@@ -56,8 +55,9 @@ export default function AddComponent() {
     setResult(null);
     moveToMomentList({ page: 1 });
   };
+
   return (
-    <Container className="p-5">
+    <div className="add-container">
       {fetching ? <FetchingModal /> : <></>}
       {result ? (
         <InfoModal
@@ -69,39 +69,41 @@ export default function AddComponent() {
       ) : (
         <></>
       )}
-      <Form>
+      <div className="add-header">순간의 기록📸</div>
+      <Form className="add-form">
         <Form.Group className="mb-3">
-          <Form.Label>moment Title</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             name="mtitle"
             type="text"
             value={moment.mtitle}
             onChange={handleChangeMoment}
-            placeholder="Enter mtitle"
+            placeholder="'기록하고 싶은 이 순간'의 제목은?"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>moment Content</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             name="mcontent"
             value={moment.mcontent}
             as="textarea"
             rows={4}
+            placeholder="이 순간을 설명하자면?"
             onChange={handleChangeMoment}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>mlocation</Form.Label>
+          <Form.Label>위치</Form.Label>
           <Form.Control
             name="mlocation"
             type="text"
             value={moment.mlocation}
             onChange={handleChangeMoment}
-            placeholder="Enter mlocation"
+            placeholder="어디서 있었던 일인가요?"
           />
         </Form.Group>
         <Form.Group className="mb-5">
-          <Form.Label>DATE</Form.Label>
+          <Form.Label>날짜</Form.Label>
           <Form.Control
             name="mdate"
             type="date"
@@ -111,15 +113,22 @@ export default function AddComponent() {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Files</Form.Label>
+          <Form.Label>사진</Form.Label>
           <Form.Control ref={uploadRef} type="file" multiple />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 ">
+      <div className="add-buttons">
         <Button variant="primary" type="button" onClick={handleClickAdd}>
           저장
         </Button>
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={() => moveToMomentList({ page: 1 })}
+        >
+          목록
+        </Button>
       </div>
-    </Container>
+    </div>
   );
 }

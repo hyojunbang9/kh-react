@@ -6,6 +6,7 @@ import FetchingModal from "../common/FetchingModal";
 import { API_SERVER_HOST } from "../../api/diaryApi";
 import useMyMove from "../../hooks/useMyMove";
 import InfoModal from "../common/InfoModal";
+import "./ModifyComponent.css";
 
 const initState = {
   mno: 0,
@@ -88,7 +89,7 @@ const ModifyComponent = ({ mno }) => {
   };
 
   return (
-    <Container className="p-5">
+    <Container className="modify-container">
       {fetching ? <FetchingModal /> : <></>}
       {result ? (
         <InfoModal
@@ -100,23 +101,19 @@ const ModifyComponent = ({ mno }) => {
       ) : (
         <></>
       )}
-      <Form>
+      <div className="modify-header">MOMENT 수정📸</div>
+      <Form className="modify-form">
         <Form.Group className="mb-3">
-          <Form.Label>MNO</Form.Label>
-          <Form.Control
-            value={mno}
-            type="text"
-            placeholder="Enter mno"
-            disabled
-          />
+          <Form.Label>번호</Form.Label>
+          <Form.Control value={mno} type="text" disabled />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>mtitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             name="mtitle"
             value={moment.mtitle}
             type="text"
-            placeholder="Enter mtitle"
+            placeholder="오늘의 순간을 한 줄로 요약하면?"
             onChange={handleChangeMoment}
           />
           <Row className="d-flex justify-content-center mt-5 gap-4">
@@ -141,32 +138,34 @@ const ModifyComponent = ({ mno }) => {
             ))}
           </Row>
           <Form.Group className="mb-3">
-            <Form.Label>Files</Form.Label>
+            <Form.Label>사진 추가</Form.Label>
             <Form.Control ref={uploadRef} type="file" multiple="true" />
           </Form.Group>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>mcontent</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             name="mcontent"
-            type="textarea"
+            as="textarea"
+            rows={3}
             value={moment.mcontent}
-            placeholder="Enter mcontent"
+            placeholder="오늘의 순간은 어땠나요?"
             onChange={handleChangeMoment}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>mlocation</Form.Label>
+          <Form.Label>장소</Form.Label>
           <Form.Control
             name="mlocation"
             value={moment.mlocation}
             type="text"
+            placeholder="어디에서 일어난 순간인가요?"
             onChange={handleChangeMoment}
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>DATE</Form.Label>
+          <Form.Label>날짜</Form.Label>
           <Form.Control
             name="mdate"
             value={moment.mdate}
@@ -176,27 +175,27 @@ const ModifyComponent = ({ mno }) => {
         </Form.Group>
       </Form>
 
-      <div className="d-flex justify-content-center gap-2 mt-5">
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          onClick={handleClickDelete}
-        >
-          삭제하기
-        </button>
-        <button
-          className="btn btn-danger"
-          type="button"
-          onClick={handleClickModify}
-        >
-          수정하기
-        </button>
+      <div className="modify-buttons">
         <button
           className="btn btn-primary"
           type="button"
+          onClick={handleClickModify}
+        >
+          수정
+        </button>
+        <button
+          className="btn btn-delete"
+          type="button"
+          onClick={handleClickDelete}
+        >
+          삭제
+        </button>
+        <button
+          className="btn btn-secondary"
+          type="button"
           onClick={moveToMomentList}
         >
-          목록가기
+          목록
         </button>
       </div>
     </Container>

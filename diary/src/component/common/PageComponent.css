@@ -1,0 +1,23 @@
+/* PageComponent.css */
+
+.pagination .page-item .page-link {
+  background-color: #ffffff; /* 흰색 배경 */
+  color: #000000; /* 검은색 글씨 */
+  border: 1px solid #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #000000; /* 검은색 배경 */
+  color: #ffffff; /* 흰색 글씨 */
+  border-color: #000000;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #f8f9fa;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: #ffffff;
+  border-color: #dee2e6;
+}

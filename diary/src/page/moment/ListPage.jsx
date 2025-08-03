@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import Header from "../../include/Header";
 import CalendarComponent from "../../component/common/Calendar";
 import moment from "moment";
-import { getList as getDiaryList } from "../../api/diaryApi"; // For marking dates
 import { getList as getMomentList } from "../../api/momentApi";
 import { useNavigate } from "react-router-dom";
+import "./ListPage.css";
+import { API_SERVER_HOST } from "../../api/diaryApi";
+
+const host = API_SERVER_HOST;
 
 const ListPage = () => {
+  const [moments, setMoments] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [marks, setMarks] = useState([]);
-  const [allMoments, setAllMoments] = useState([]); // Store all moments
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      const diaryResponse = await getDiaryList({ page: 1, size: 1000 });
       const momentResponse = await getMomentList({ page: 1, size: 1000 });
-
-      const fetchedDiaries = diaryResponse.dtoList || [];
       const fetchedMoments = momentResponse.dtoList || [];
-
-      setAllMoments(fetchedMoments);
-
-      const diaryDates = fetchedDiaries.map((d) => d.ddate);
+      setMoments(fetchedMoments);
       const momentDates = fetchedMoments.map((m) => m.mdate);
-      setMarks([...new Set([...diaryDates, ...momentDates])]);
+      setMarks([...new Set(momentDates)]);
     };
-
     fetchData();
   }, []);
 
@@ -35,41 +31,41 @@ const ListPage = () => {
     setSelectedDate(date);
   };
 
-  const filteredMoments = allMoments.filter((m) =>
+  const filteredMoments = moments.filter((m) =>
     moment(m.mdate).isSame(selectedDate, "day")
   );
 
   return (
-    <Container>
-      <Header />
-      <Row className="mt-5">
-        <Col md={12}>
+    <>
+      <Container className="list-page-container">
+        <div className="Header-margin">
+          <Header />
+        </div>
+        <div className="calendar-container">
           <CalendarComponent marks={marks} onDateChange={handleDateChange} />
-        </Col>
-        <Col md={12}>
-          <h2 className="h2-margin">
+        </div>
+        <div className="content-container">
+          <h2 className="selected-date-header">
             {moment(selectedDate).format("YYYY-MM-DD")}
           </h2>
-          <h5>Moment ({filteredMoments.length})</h5>
-          <ListGroup>
-            {filteredMoments.length === 0 ? (
-              <ListGroup.Item>No moment entries for this date.</ListGroup.Item>
-            ) : (
-              filteredMoments.map((moment) => (
-                <ListGroup.Item
-                  key={moment.mno}
-                  onClick={() => navigate(`/moment/read/${moment.mno}`)}
-                  action
-                  className="clickable-item"
-                >
-                  {moment.mtitle}
-                </ListGroup.Item>
-              ))
-            )}
-          </ListGroup>
-        </Col>
-      </Row>
-    </Container>
+          <div className="moment-items-container">
+            {filteredMoments.map((moment) => (
+              <div
+                key={moment.mno}
+                className="moment-item-card"
+                onClick={() => navigate(`/moment/read/${moment.mno}`)}
+              >
+                <p>{moment.mtitle}</p>
+                <img
+                  src={`${host}/api/moment/view/s_${moment.uploadFileNames[0]}`}
+                  alt={moment.mtitle}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </>
   );
 };
 

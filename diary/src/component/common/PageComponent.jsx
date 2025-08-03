@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import Pagination from "react-bootstrap/Pagination";
+import "./PageComponent.css";
 const PageComponent = ({ serverData, moveToList }) => {
   return (
     <Container className="d-flex justify-content-center mt-3">

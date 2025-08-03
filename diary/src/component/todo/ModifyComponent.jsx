@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { deleteOne, getOne, putOne } from "../../api/todoApi";
 import InfoModal from "../common/InfoModal";
 import useMyMove from "../../hooks/useMyMove";
+import "./ModifyComponent.css";
 
 const initState = {
   tno: 0,
@@ -52,22 +53,18 @@ const ModifyComponent = ({ tno }) => {
   };
 
   return (
-    <Container className="p-5">
+    <Container className="modify-container">
       <InfoModal
         show={infoModalOn}
         title={`RESULT`}
         content={`${result}`}
         callbackFn={closeModal}
       />
-      <Form>
+      <div className="modify-header">TODO 수정🫠</div>
+      <Form className="modify-form">
         <Form.Group className="mb-3">
-          <Form.Label>tno</Form.Label>
-          <Form.Control
-            value={tno}
-            type="text"
-            placeholder="Enter tno"
-            disabled
-          />
+          <Form.Label>번호</Form.Label>
+          <Form.Control value={tno} type="text" disabled />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Check
@@ -79,69 +76,68 @@ const ModifyComponent = ({ tno }) => {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>ttitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             type="text"
             name="ttitle"
             value={todo.ttitle}
-            placeholder="Enter ttitle"
+            placeholder="할 일을 한 줄로 요약하면?"
             onChange={handleChangeTodo}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>twriter</Form.Label>
+          <Form.Label>작성자</Form.Label>
           <Form.Control
             value={todo.twriter}
             type="text"
-            placeholder="Enter twriter"
+            placeholder="누가 작성했나요?"
             disabled
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>tcontent</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             type="textarea"
             name="tcontent"
             value={todo.tcontent}
-            placeholder="Enter tcontent"
+            placeholder="할 일에 대한 자세한 내용을 입력하세요."
             onChange={handleChangeTodo}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dweather</Form.Label>
+          <Form.Label>마감 기한</Form.Label>
           <Form.Control
-            type="text"
-            name="dweather"
-            value={todo.dweather}
-            placeholder="Enter dweather"
+            type="date"
+            name="dueDate"
+            value={todo.dueDate}
             onChange={handleChangeTodo}
           />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 mt-5">
+      <div className="modify-buttons">
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           type="button"
           onClick={handleClickModify}
         >
-          수정하기
+          수정
         </button>
         <button
-          className="btn btn-danger"
+          className="btn btn-delete"
           type="button"
           onClick={handleClickDelete}
         >
-          삭제하기
+          삭제
         </button>
 
         <button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           type="text"
           onClick={() => {
             moveToTodoList();
           }}
         >
-          목록가기
+          목록
         </button>
       </div>
     </Container>

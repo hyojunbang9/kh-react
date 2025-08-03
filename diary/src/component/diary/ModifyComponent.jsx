@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { deleteOne, getOne, putOne } from "../../api/diaryApi";
 import InfoModal from "../common/InfoModal";
+import "./ModifyComponent.css";
 
 const initState = {
   dno: 0,
@@ -50,64 +51,52 @@ const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
   };
 
   return (
-    <Container className="p-5">
+    <Container className="modify-container">
       <InfoModal
         show={infoModalOn}
         title={`RESULT`}
         content={`${result}`}
         callbackFn={closeModal}
       />
-      <Form>
+      <div className="modify-header">DIARY 수정📝</div>
+      <Form className="modify-form">
         <Form.Group className="mb-3">
-          <Form.Label>dno</Form.Label>
-          <Form.Control
-            value={dno}
-            type="text"
-            placeholder="Enter no"
-            disabled
-          />
+          <Form.Label>{dno}번 일기</Form.Label>
+          <Form.Control value={dno} type="text" disabled />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dtitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             type="text"
             name="dtitle"
             value={diary.dtitle}
-            placeholder="Enter dtitle"
             onChange={handleChangeDiary}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dwriter</Form.Label>
-          <Form.Control
-            value={diary.dwriter}
-            type="text"
-            placeholder="Enter dwriter"
-            disabled
-          />
+          <Form.Label>글쓴이</Form.Label>
+          <Form.Control value={diary.dwriter} type="text" disabled />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dcontent</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             type="textarea"
             name="dtitle"
             value={diary.dcontent}
-            placeholder="Enter dcontent"
             onChange={handleChangeDiary}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dweather</Form.Label>
+          <Form.Label>날씨</Form.Label>
           <Form.Control
             type="text"
             name="dweather"
             value={diary.dweather}
-            placeholder="Enter dweather"
             onChange={handleChangeDiary}
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>ddate</Form.Label>
+          <Form.Label>날짜</Form.Label>
           <Form.Control
             name="ddate"
             value={diary.ddate}
@@ -116,30 +105,30 @@ const ModifyComponent = ({ dno, moveToList, moveToRead }) => {
           />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 mt-5">
+      <div className="modify-buttons">
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           type="button"
           onClick={handleClickModify}
         >
-          수정하기
+          수정
         </button>
         <button
-          className="btn btn-danger"
+          className="btn btn-delete"
           type="button"
           onClick={handleClickDelete}
         >
-          삭제하기
+          삭제
         </button>
 
         <button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           type="text"
           onClick={() => {
             moveToList();
           }}
         >
-          목록가기
+          목록
         </button>
       </div>
     </Container>

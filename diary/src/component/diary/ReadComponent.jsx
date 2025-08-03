@@ -56,22 +56,22 @@ const ReadComponent = ({ dno, moveToList, moveToModify }) => {
       </table>
       <div className="d-flex justify-content-center gap-2 mt-5">
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           type="button"
           onClick={() => {
             moveToModify(dno);
           }}
         >
-          수정하기
+          수정
         </button>
         <button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           type="button"
           onClick={() => {
             moveToList();
           }}
         >
-          목록가기
+          목록
         </button>
       </div>
     </Container>

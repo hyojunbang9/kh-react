@@ -4,6 +4,7 @@ import { API_SERVER_HOST } from "../../api/diaryApi";
 import useCustomMove from "../../hooks/useMyMove";
 import FetchingModal from "../common/FetchingModal";
 import { Container, Form } from "react-bootstrap";
+import "./ReadComponent.css";
 
 const initState = {
   mno: 0,
@@ -30,24 +31,17 @@ const ReadComponent = ({ mno }) => {
   }, [mno]);
 
   return (
-    <Container className="p-5">
+    <Container className="read-container">
       {fetching ? <FetchingModal /> : <></>}
-      <Form>
+      <div className="read-header">{mno}번 순간📸</div>
+      <Form className="read-form">
+        <Form.Group className="mb-3"></Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>MNO</Form.Label>
-          <Form.Control
-            value={mno}
-            type="text"
-            placeholder="Enter mno"
-            disabled
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>mtitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             value={moment.mtitle}
             type="text"
-            placeholder="Enter mtitle"
+            placeholder="오늘의 순간을 한 줄로 요약하면?"
             disabled
           />
         </Form.Group>
@@ -62,47 +56,47 @@ const ReadComponent = ({ mno }) => {
           ))}
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>mcontent</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             type="text"
             value={moment.mcontent}
-            placeholder="Enter mcontent"
+            placeholder="오늘의 순간은 어땠나요?"
             disabled
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>mlocation</Form.Label>
+          <Form.Label>장소</Form.Label>
           <Form.Control
             type="text"
             value={moment.mlocation}
-            placeholder="Enter mlocation"
+            placeholder="어디에서 일어난 순간인가요?"
             disabled
           />
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>DATE</Form.Label>
+          <Form.Label>날짜</Form.Label>
           <Form.Control defaultValue={moment.mdate} type="text" disabled />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 mt-5">
+      <div className="read-buttons">
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           type="button"
           onClick={() => {
             moveToMomentModify(mno);
           }}
         >
-          수정하기
+          수정
         </button>
         <button
-          className="btn btn-info"
+          className="btn btn-secondary"
           type="button"
           onClick={() => {
             moveToMomentList();
           }}
         >
-          리스트보기
+          목록
         </button>
       </div>
     </Container>

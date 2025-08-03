@@ -1,8 +1,9 @@
-import { useState, React } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import useMyMove from "../../hooks/useMyMove";
 import { postAdd } from "../../api/todoApi";
 import InfoModal from "../common/InfoModal";
+import "./AddComponent.css";
 
 const initState = {
   done: false,
@@ -26,15 +27,13 @@ export default function AddComponent() {
   const handleClickAdd = () => {
     postAdd(todo)
       .then((result) => {
-        console.log(result);
         setResult(result.TNO);
         setInfoModalOn(true);
-        setTodo({ ...initState }); // 초기화
+        setTodo({ ...initState });
       })
       .catch((e) => {
         console.error(e);
       });
-    console.log(todo);
   };
 
   const closeModal = () => {
@@ -43,7 +42,7 @@ export default function AddComponent() {
   };
 
   return (
-    <Container className="p-5">
+    <div className="add-container">
       <InfoModal
         show={infoModalOn}
         onHide={() => setInfoModalOn(false)}
@@ -51,81 +50,70 @@ export default function AddComponent() {
         content={`New ${result} Added`}
         callbackFn={() => closeModal()}
       />
-      <Form>
+      <div className="add-header">해야할 일...🫠</div>
+      <Form className="add-form">
         <Form.Group className="mb-3">
-          <Form.Check
-            name="done"
-            type="checkbox"
-            label="완료 여부"
-            checked={todo.done} // boolean 값
-            onChange={(e) => setTodo({ ...todo, done: e.target.checked })}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>ttitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             name="ttitle"
             type="text"
             value={todo.ttitle}
             onChange={handleChangetodo}
-            placeholder="Enter ttitle"
+            placeholder="해야할 일을 한 줄로 정리"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>twriter</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
-            name="twriter"
-            type="text"
-            value={todo.twriter}
-            onChange={handleChangetodo}
-            placeholder="Enter twriter"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>tcontent</Form.Label>
-          <Form.Control
+            as="textarea"
+            rows={3}
             name="tcontent"
-            type="text"
             value={todo.tcontent}
             onChange={handleChangetodo}
-            placeholder="Enter tcontent"
+            placeholder="어떤 일인가요?"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>twriter</Form.Label>
+          <Form.Label>해야하는 사람</Form.Label>
           <Form.Control
             name="twriter"
             type="text"
             value={todo.twriter}
             onChange={handleChangetodo}
-            placeholder="Enter twriter"
+            placeholder="해야하는 사람"
           />
         </Form.Group>
         <Form.Group className="mb-5">
-          <Form.Label>dueDate</Form.Label>
+          <Form.Label>마감 기한</Form.Label>
           <Form.Control
             name="dueDate"
             type="date"
             value={todo.dueDate}
             onChange={handleChangetodo}
-            placeholder="Enter dueDate"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Check
+            name="done"
+            type="checkbox"
+            label="완료 여부"
+            checked={todo.done}
+            onChange={(e) => setTodo({ ...todo, done: e.target.checked })}
           />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 ">
+      <div className="add-buttons">
         <Button variant="primary" type="button" onClick={handleClickAdd}>
           저장
         </Button>
         <Button
-          variant="primary"
+          variant="secondary"
           type="button"
-          onClick={() => {
-            moveToList({ page: 1 });
-          }}
+          onClick={() => moveToList({ page: 1 })}
         >
           목록
         </Button>
       </div>
-    </Container>
+    </div>
   );
 }

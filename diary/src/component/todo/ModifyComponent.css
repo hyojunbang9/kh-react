@@ -1,0 +1,89 @@
+.modify-container {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 3rem auto;
+  max-width: 600px;
+}
+
+.modify-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: #212529;
+}
+
+.modify-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.modify-form .form-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.modify-form .form-control {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modify-form .form-control:focus {
+  background-color: #ffffff;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.modify-form .form-check-label {
+  font-size: 1rem;
+  color: #495057;
+}
+
+/* Checkbox styles */
+.modify-form .form-check-input[type="checkbox"] {
+  accent-color: black !important;
+  background-color: white !important;
+  border-color: black !important;
+}
+
+.modify-form .form-check-input[type="checkbox"]:checked {
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.modify-form .form-check-input[type="checkbox"]:disabled {
+  background-color: #e9ecef !important;
+  border-color: #adb5bd !important;
+  opacity: 0.65;
+}
+
+.modify-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.btn-primary {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.btn-secondary {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: #ffffff !important;
+}
+
+.btn-delete {
+  background-color: rgba(255, 0, 0, 0.5) !important;
+  border-color: rgba(255, 0, 0, 0.5) !important;
+  color: #ffffff !important;
+}

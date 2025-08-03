@@ -5,12 +5,17 @@ import CalendarComponent from "../component/common/Calendar";
 import moment from "moment";
 import { getList as getDiaryList } from "../api/diaryApi";
 import { getList as getMomentList } from "../api/momentApi";
+import { getList as getTodoList } from "../api/todoApi";
 import { useNavigate } from "react-router-dom";
 import "./MainPage.css";
+import { API_SERVER_HOST } from "../api/diaryApi";
+
+const host = API_SERVER_HOST;
 
 const MainPage = () => {
   const [diary, setDiary] = useState([]);
   const [moments, setMoments] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [marks, setMarks] = useState([]);
   const navigate = useNavigate();
@@ -19,16 +24,20 @@ const MainPage = () => {
     const fetchData = async () => {
       const diaryResponse = await getDiaryList({ page: 1, size: 1000 });
       const momentResponse = await getMomentList({ page: 1, size: 1000 });
+      const todoResponse = await getTodoList({ page: 1, size: 1000 });
 
       const fetchedDiary = diaryResponse.dtoList || [];
       const fetchedMoments = momentResponse.dtoList || [];
+      const fetchedTodos = todoResponse.dtoList || [];
 
       setDiary(fetchedDiary);
       setMoments(fetchedMoments);
+      setTodos(fetchedTodos);
 
       const diaryDates = fetchedDiary.map((d) => d.ddate);
       const momentDates = fetchedMoments.map((m) => m.mdate);
-      setMarks([...new Set([...diaryDates, ...momentDates])]);
+      const todoDates = fetchedTodos.map((t) => t.dueDate);
+      setMarks([...new Set([...diaryDates, ...momentDates, ...todoDates])]);
     };
 
     fetchData();
@@ -44,6 +53,10 @@ const MainPage = () => {
 
   const filteredMoments = moments.filter((m) =>
     moment(m.mdate).isSame(selectedDate, "day")
+  );
+
+  const filteredTodos = todos.filter((t) =>
+    moment(t.dueDate).isSame(selectedDate, "day")
   );
 
   return (
@@ -71,15 +84,36 @@ const MainPage = () => {
             ))}
           </ListGroup>
           <h5 className="mt-3">📸 Moment ({filteredMoments.length})</h5>
-          <ListGroup>
+          <div className="moment-list-container">
             {filteredMoments.map((moment) => (
-              <ListGroup.Item
+              <div
                 key={moment.mno}
+                className="moment-item-card"
                 onClick={() => navigate(`/moment/read/${moment.mno}`)}
-                action
-                className="clickable-item"
               >
-                {moment.mtitle}
+                <p>{moment.mtitle}</p>
+                <img
+                  src={`${host}/api/moment/view/s_${moment.uploadFileNames[0]}`}
+                  alt={moment.mtitle}
+                />
+              </div>
+            ))}
+          </div>
+          <h5 className="mt-3">🫠 Todo ({filteredTodos.length})</h5>
+          <ListGroup className="main-page-todo-list-group">
+            {filteredTodos.map((todo) => (
+              <ListGroup.Item
+                key={todo.tno}
+                className="d-flex align-items-center clickable-item"
+                onClick={() => navigate(`/todo/read/${todo.tno}`)}
+              >
+                <input
+                  type="checkbox"
+                  checked={todo.done}
+                  readOnly
+                  className="me-2"
+                />
+                <span>{todo.ttitle}</span>
               </ListGroup.Item>
             ))}
           </ListGroup>

@@ -1,0 +1,61 @@
+.todo-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.todo-note {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: calc(33.333% - 1rem);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.todo-note:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.todo-note .status {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+/* Checkbox styles */
+.todo-note .status input[type="checkbox"] {
+  accent-color: black !important;
+  background-color: white !important;
+  border-color: black !important;
+}
+
+.todo-note .status input[type="checkbox"]:checked {
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.todo-note .status input[type="checkbox"]:disabled {
+  background-color: #e9ecef !important;
+  border-color: #adb5bd !important;
+  opacity: 0.65;
+}
+
+.todo-note .title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.todo-note .due-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+}

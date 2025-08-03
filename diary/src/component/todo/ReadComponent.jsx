@@ -3,6 +3,7 @@ import { getOne } from "../../api/todoApi";
 import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import useMyMove from "../../hooks/useMyMove";
+import "./ReadComponent.css";
 
 const initState = {
   tno: 0,
@@ -24,17 +25,9 @@ const ReadComponent = ({ tno }) => {
   }, [tno]);
 
   return (
-    <Container className="p-5">
-      <Form>
-        <Form.Group>
-          <Form.Label>TNO</Form.Label>
-          <Form.Control
-            value={todo.tno}
-            type="text"
-            placeholder="Enter no"
-            disabled
-          />
-        </Form.Group>
+    <Container className="read-container">
+      <div className="read-header">{todo.tno}번 할 일🫠</div>
+      <Form className="read-form">
         <Form.Group className="mb-3">
           <Form.Check
             name="done"
@@ -44,52 +37,55 @@ const ReadComponent = ({ tno }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>ttitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             value={todo.ttitle}
             type="text"
-            placeholder="Enter ttitle"
+            placeholder="할 일을 한 줄로 요약하면?"
+            disabled
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>twriter</Form.Label>
+          <Form.Label>작성자</Form.Label>
           <Form.Control
             type="text"
             value={todo.twriter}
-            placeholder="Enter twriter"
+            placeholder="누가 작성했나요?"
+            disabled
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>tcontent</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             type="text"
             value={todo.tcontent}
-            placeholder="Enter tcontent"
+            placeholder="할 일에 대한 자세한 내용을 입력하세요."
+            disabled
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>dueDate</Form.Label>
+          <Form.Label>기한</Form.Label>
           <Form.Control value={todo.dueDate} type="text" disabled />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 mt-5">
+      <div className="read-buttons">
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           type="button"
           onClick={() => {
             moveToTodoModify(tno);
           }}
         >
-          수정하기
+          수정
         </button>
         <button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           type="button"
           onClick={() => {
             moveToTodoList();
           }}
         >
-          목록가기
+          목록
         </button>
       </div>
     </Container>

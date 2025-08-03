@@ -17,7 +17,7 @@ const useMyMove = () => {
   const [refresh, setRefresh] = useState(false);
   const [queryParams] = useSearchParams();
   const page = getNum(queryParams.get("page"), 1);
-  const size = getNum(queryParams.get("size"), 10);
+  const size = getNum(queryParams.get("size"), 9);
   const queryDefault = createSearchParams({ page, size }).toString(); //새로 추가
 
   const moveToList = (pageParam) => {

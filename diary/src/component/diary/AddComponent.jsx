@@ -1,8 +1,9 @@
-import { useState, React } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import useMyMove from "../../hooks/useMyMove";
 import { postAdd } from "../../api/diaryApi";
 import InfoModal from "../common/InfoModal";
+import "./AddComponent.css";
 
 const initState = {
   dtitle: "",
@@ -26,15 +27,13 @@ export default function AddComponent() {
   const handleClickAdd = () => {
     postAdd(diary)
       .then((result) => {
-        console.log(result);
         setResult(result.DNO);
         setInfoModalOn(true);
-        setdiary({ ...initState }); // 초기화
+        setdiary({ ...initState });
       })
       .catch((e) => {
         console.error(e);
       });
-    console.log(diary);
   };
 
   const closeModal = () => {
@@ -43,7 +42,7 @@ export default function AddComponent() {
   };
 
   return (
-    <Container className="p-5">
+    <div className="add-container">
       <InfoModal
         show={infoModalOn}
         onHide={() => setInfoModalOn(false)}
@@ -51,7 +50,8 @@ export default function AddComponent() {
         content={`New ${result} Added`}
         callbackFn={() => closeModal()}
       />
-      <Form>
+      <div className="add-header">일상의 기록📝</div>
+      <Form className="add-form">
         <Form.Group className="mb-3">
           <Form.Label>제목</Form.Label>
           <Form.Control
@@ -75,8 +75,9 @@ export default function AddComponent() {
         <Form.Group className="mb-3">
           <Form.Label>내용</Form.Label>
           <Form.Control
+            as="textarea"
+            rows={3}
             name="dcontent"
-            type="text"
             value={diary.dcontent}
             onChange={handleChangediary}
             placeholder="당신의 오늘 하루는 어땠나요?"
@@ -89,7 +90,7 @@ export default function AddComponent() {
             type="text"
             value={diary.dweather}
             onChange={handleChangediary}
-            placeholder="오늘의 날씨! 기분을 담은 날씨도 좋아요. ex) '🌩️우중충한 날씨조차 내 행복을 막지 못한 날☀️'"
+            placeholder="기분을 담은 날씨도 좋아요. ex) '🌩️우중충한 날씨도 행복을 막지 못함☀️'"
           />
         </Form.Group>
         <Form.Group className="mb-5">
@@ -102,20 +103,18 @@ export default function AddComponent() {
           />
         </Form.Group>
       </Form>
-      <div className="d-flex justify-content-center gap-2 ">
+      <div className="add-buttons">
         <Button variant="primary" type="button" onClick={handleClickAdd}>
           저장
         </Button>
         <Button
-          variant="primary"
+          variant="secondary"
           type="button"
-          onClick={() => {
-            moveToList({ page: 1 });
-          }}
+          onClick={() => moveToList({ page: 1 })}
         >
           목록
         </Button>
       </div>
-    </Container>
+    </div>
   );
 }

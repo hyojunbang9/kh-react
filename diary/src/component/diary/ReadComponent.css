@@ -47,3 +47,16 @@ td {
 .weather {
   font-size: 3rem;
 }
+
+/* Button styles for ReadComponent */
+.btn-primary {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.btn-secondary {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: #ffffff !important;
+}

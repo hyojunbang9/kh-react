@@ -1,0 +1,69 @@
+.add-container {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 3rem auto;
+  max-width: 600px;
+}
+
+.add-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: #212529;
+}
+
+.add-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.add-form .form-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.add-form .form-control {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-form .form-control:focus {
+  background-color: #ffffff;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.add-form .form-check-label {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.add-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.add-buttons .btn-primary {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+}
+
+.add-buttons .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+}
