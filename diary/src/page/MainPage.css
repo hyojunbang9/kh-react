@@ -1,0 +1,19 @@
+.clickable-item {
+  cursor: pointer;
+  margin: 5px;
+  border: solid 1px black !important;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.dateForCategory {
+  margin-top: 10px;
+}
+
+.h2-margin {
+  margin: 20px 0px;
+}
+
+.bbb {
+  margin: 20px 0px;
+}

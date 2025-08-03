@@ -6,7 +6,6 @@ export default function AddPage() {
   return (
     <Container>
       <Header />
-      Diary Add Page
       <AddComponent />
     </Container>
   );

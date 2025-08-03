@@ -53,53 +53,52 @@ export default function AddComponent() {
       />
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>dtitle</Form.Label>
+          <Form.Label>제목</Form.Label>
           <Form.Control
             name="dtitle"
             type="text"
             value={diary.dtitle}
             onChange={handleChangediary}
-            placeholder="Enter dtitle"
+            placeholder="오늘을 한 줄로 요약하면?   ex) '꼭 기억하고 싶은 하루'"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dwriter</Form.Label>
+          <Form.Label>글쓴이</Form.Label>
           <Form.Control
             name="dwriter"
             type="text"
             value={diary.dwriter}
             onChange={handleChangediary}
-            placeholder="Enter dwriter"
+            placeholder="오늘 당신은 어떤 사람이었나요? ex) '세상을 가진 사람'"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dcontent</Form.Label>
+          <Form.Label>내용</Form.Label>
           <Form.Control
             name="dcontent"
             type="text"
             value={diary.dcontent}
             onChange={handleChangediary}
-            placeholder="Enter dcontent"
+            placeholder="당신의 오늘 하루는 어땠나요?"
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>dweather</Form.Label>
+          <Form.Label>날씨</Form.Label>
           <Form.Control
             name="dweather"
             type="text"
             value={diary.dweather}
             onChange={handleChangediary}
-            placeholder="Enter dweather"
+            placeholder="오늘의 날씨! 기분을 담은 날씨도 좋아요. ex) '🌩️우중충한 날씨조차 내 행복을 막지 못한 날☀️'"
           />
         </Form.Group>
         <Form.Group className="mb-5">
-          <Form.Label>ddate</Form.Label>
+          <Form.Label>날짜</Form.Label>
           <Form.Control
             name="ddate"
             type="date"
             value={diary.ddate}
             onChange={handleChangediary}
-            placeholder="Enter ddate"
           />
         </Form.Group>
       </Form>

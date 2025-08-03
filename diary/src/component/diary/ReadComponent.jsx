@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getOne } from "../../api/diaryApi";
 import { Container } from "react-bootstrap";
 import "./ReadComponent.css";
+import rewardImage from "./img/goodBoy.jpg";
 
 const initState = {
   dno: 0,
@@ -25,24 +26,32 @@ const ReadComponent = ({ dno, moveToList, moveToModify }) => {
     <Container className="p-5">
       <table>
         <tr>
-          <th>{diary.dno}</th>
-          <th colSpan={9}>오늘의 일기</th>
+          <td>{diary.dno}</td>
+          <td colSpan={9}>오늘의 일기</td>
         </tr>
-        <tr>
-          <td colSpan={9}></td>
+        <tr className="titleLine">
+          <td colSpan={9} className="title">
+            {diary.dtitle}
+          </td>
           <td>{diary.dwriter}</td>
         </tr>
         <tr>
-          <td></td>
-          <td colSpan={5}>{diary.dtitle}</td>
+          <th></th>
+          <th colSpan={5} className="content">
+            {diary.dcontent}
+          </th>
         </tr>
-        <tr>
-          <td colSpan={5}>{diary.dweather}</td>
+        <tr className="dateLine">
+          <td colSpan={5}>날씨☀️</td>
           <td colSpan={5}>{diary.ddate}</td>
         </tr>
         <tr>
-          <td colSpan={7}>d</td>
-          <td colSpan={3}>d</td>
+          <td colSpan={7} className="weather">
+            {diary.dweather}
+          </td>
+          <td colSpan={3} className="goodJob">
+            <img src={rewardImage} style={{ width: "100px" }} alt="goodBoy" />
+          </td>
         </tr>
       </table>
       <div className="d-flex justify-content-center gap-2 mt-5">
