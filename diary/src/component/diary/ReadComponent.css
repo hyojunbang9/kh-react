@@ -17,6 +17,12 @@ td {
   height: 5vh;
 }
 
+.diaryDno {
+  width: 20%;
+  max-width: 20%;
+  min-width: 20%;
+}
+
 .title {
   font-weight: 600;
   font-size: 1.5rem;

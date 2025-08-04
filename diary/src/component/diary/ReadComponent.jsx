@@ -26,7 +26,7 @@ const ReadComponent = ({ dno, moveToList, moveToModify }) => {
     <Container className="p-5">
       <table>
         <tr>
-          <td>{diary.dno}</td>
+          <td className="diaryDno">{diary.dno}</td>
           <td colSpan={9}>오늘의 일기</td>
         </tr>
         <tr className="titleLine">
